@@ -18,10 +18,12 @@ def planet_position (bot,update):
     user_text = update.message.text.split()
     input_planet = (user_text[1])
     if input_planet == 'Марс':
-        update.message.reply_text(ephem.constellation(ephem.Mars('2000/05/26')))
+        user_planet = ephem.Mars('2000/05/26')
     elif input_planet == 'Юпитер':
-        update.message.reply_text(ephem.constellation(ephem.Jupiter('2019/05/26')))
-
+        user_planet = ephem.Jupiter('2019/05/26')
+    else:
+        update.message.reply_text(f'не знаю такой планеты')
+    return update.message.reply_text(ephem.constellation(user_planet))
 
 def talk_to_me(bot, update):
     user_text = update.message.text
