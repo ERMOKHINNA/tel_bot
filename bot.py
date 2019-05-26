@@ -18,16 +18,17 @@ def planet_position (bot,update):
     user_text = update.message.text.split()
     try:
         input_planet = (user_text[1])
-
-        if input_planet == 'Марс':
-            user_planet = ephem.Mars('2000/05/26')
-        elif input_planet == 'Юпитер':
-            user_planet = ephem.Jupiter('2019/05/26')
-        else:
-            update.message.reply_text('не знаю такой планеты')
-    except (UnboundLocalError, IndexError):
+    except IndexError:
         update.message.reply_text('планета не указана')
-        pass
+
+    if input_planet == 'Марс':
+        user_planet = ephem.Mars('2000/05/26')
+    elif input_planet == 'Юпитер':
+        user_planet = ephem.Jupiter('2019/05/26')
+    else:
+        update.message.reply_text('не знаю такой планеты')
+        return 0
+
     return update.message.reply_text(ephem.constellation(user_planet))
 
 def talk_to_me(bot, update):
